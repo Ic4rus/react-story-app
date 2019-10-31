@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Layout } from 'antd';
+import * as RouteMap from '../../constants/RouteMap';
+import { withRouter } from 'react-router-dom';
 import './Sider.css';
 
 const menuItems = [
-  { icon: 'plus', name: 'Item 1', route: '1', default: true },
+  { icon: 'plus', name: 'Item 1', route: RouteMap.ROUTE_ITEM1 },
   {
     icon: 'plus',
     name: 'Item 2',
-    route: '2',
+    route: RouteMap.ROUTE_ITEM2,
     subItems: [
-      { icon: 'minus', name: 'Sub item 1' },
-      { icon: 'minus', name: 'Sub item 2' }
+      {
+        icon: 'minus',
+        name: 'Sub item 1',
+        route: RouteMap.ROUTE_ITEM2_SUBITEM1
+      },
+      {
+        icon: 'minus',
+        name: 'Sub item 2',
+        route: RouteMap.ROUTE_ITEM2_SUBITEM2
+      }
     ]
   },
-  { icon: 'plus', name: 'Item 3', route: '3' },
-  { icon: 'plus', name: 'Item 4', route: '4' },
-  { icon: 'plus', name: 'Item 5', route: '5' }
+  { icon: 'plus', name: 'Item 3', route: RouteMap.ROUTE_ITEM3 },
+  { icon: 'plus', name: 'Item 4', route: RouteMap.ROUTE_ITEM4 },
+  { icon: 'plus', name: 'Item 5', route: RouteMap.ROUTE_ITEM5 }
 ];
 
 class Sider extends Component {
@@ -27,10 +37,12 @@ class Sider extends Component {
     this.setState({ collapsed });
   };
 
+  handleChangeMenu = ({ key }) => {
+    this.props.history.push(key);
+  };
+
   render() {
-    const defaultItems = menuItems.filter(item => {
-      return item.default;
-    });
+    const { location } = this.props;
     return (
       <Layout.Sider
         collapsible
@@ -40,8 +52,9 @@ class Sider extends Component {
         <div className="logo-container" />
         <Menu
           theme="dark"
-          defaultSelectedKeys={defaultItems[0].route}
+          selectedKeys={[location.pathname]}
           mode="inline"
+          onClick={this.handleChangeMenu}
         >
           {menuItems.map(item => {
             if (item.subItems && item.subItems.length > 0) {
@@ -78,4 +91,4 @@ class Sider extends Component {
   }
 }
 
-export default Sider;
+export default withRouter(Sider);
