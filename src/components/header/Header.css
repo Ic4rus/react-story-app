@@ -1,0 +1,13 @@
+.header-container {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #d4d4d4;
+  background: white;
+}
+
+.header-title {
+  line-height: 60px;
+  font-size: 18px;
+  margin-left: 16px;
+}
