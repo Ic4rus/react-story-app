@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
 import Sider from './components/sider/Sider';
 import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import './App.css';
 import 'antd/dist/antd.css';
 
@@ -18,6 +19,7 @@ class App extends Component {
             <Content className="page-container">
               <div className="page-content"></div>
             </Content>
+            <Footer />
           </Layout>
         </Layout>
       </Layout>
